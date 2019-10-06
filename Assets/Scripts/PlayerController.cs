@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,15 +16,20 @@ public class PlayerController : MonoBehaviour
 
     //Sprites
     private SpriteRenderer rend;
-    public Sprite[] costumes;
+    
     
     //Variables
     public int sp = 0;
+    public Text spText;
+
+    //Animator
+    Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -33,6 +39,11 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
+
+        //Animations
+        anim.SetFloat("moveX", movement.x);
+        anim.SetFloat("moveY", movement.y);
+        anim.SetInteger("curCostume", (int)curState);
 
         //States
         switch(curState)
@@ -48,36 +59,35 @@ public class PlayerController : MonoBehaviour
             case states.werewolf:
                 break;
         }
+        spText.text = "SP: " + sp.ToString();
     }
+
+    
 
     //Costume Functions
     public void Ghost()
     {
         curState = states.ghost;
-        rend.sprite = costumes[0];
+
     }
 
     public void Skeleton()
     {
         curState = states.skeleton;
-        rend.sprite = costumes[1];
     }
 
     public void Clown()
     {
         curState = states.clown;
-        rend.sprite = costumes[2];
     }
 
     public void Vampire()
     {
         curState = states.vampire;
-        rend.sprite = costumes[3];
     }
 
     public void Werewolf()
     {
         curState = states.werewolf;
-        rend.sprite = costumes[4];
     }
 }
