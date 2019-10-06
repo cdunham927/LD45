@@ -261,12 +261,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5643f45c4bba9594892f1353f34e3ac1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2dffb9d1b7b70a8408ba156076fcd1e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 0.32}
+  m_Size: {x: 0.3, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -303,8 +303,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.31, y: 0.32}
-    newSize: {x: 1.28, y: 0.32}
+    oldSize: {x: 0.3, y: 0.32}
+    newSize: {x: 0.3, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -346,9 +346,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
+  curState: 0
   costumes:
-  - {fileID: 21300000, guid: 5643f45c4bba9594892f1353f34e3ac1, type: 3}
-  - {fileID: 21300000, guid: e87e6944717fe3c439720579047cfb13, type: 3}
+  - {fileID: 6990181674316732578, guid: c8cd12f3acab9174d941b2f83f0e2a13, type: 3}
+  - {fileID: 4354231566380549168, guid: 9f13676ee74bbb843b5c91d8d1253aa7, type: 3}
+  sp: 0
 --- !u!1 &745537966
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +597,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1634764598}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 443346119}
+        m_MethodName: Skeleton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1634764598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,11 +701,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: bc607cfe848f9f74ebf3799211d6202b, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -700,7 +713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Costumes
+  m_Text: Skeleton
 --- !u!222 &1753090217
 CanvasRenderer:
   m_ObjectHideFlags: 0
