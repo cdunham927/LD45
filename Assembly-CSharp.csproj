@@ -64,6 +64,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\NPCController.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Grid.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Heap.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Line.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Path.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\PathRequestManager.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Owner/Documents/LD45/LD45/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
