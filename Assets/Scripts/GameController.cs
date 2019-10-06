@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public GameObject[] houses;
     public GameObject[] mapExits;
     Image curCostume;
+    public Text shopText;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
         }
 
         curCostume.color = Color.green;
+        shopText.gameObject.SetActive(canShop);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

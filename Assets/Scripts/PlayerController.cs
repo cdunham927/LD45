@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
     //Sprites
     private SpriteRenderer rend;
     
-    
     //Variables
     public int sp = 0;
     public Text spText;
+    public Text spText2;
 
     //Animator
     Animator anim;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         spText.text = "SP: " + sp.ToString();
+        spText2.text = "SP: " + sp.ToString();
     }
 
     
