@@ -5,7 +5,6 @@ using System;
 
 public class PathRequestManager : MonoBehaviour
 {
-
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
     PathRequest currentPathRequest;
 
@@ -14,7 +13,7 @@ public class PathRequestManager : MonoBehaviour
 
     bool isProcessingPath;
 
-    private void Awake()
+    void Awake()
     {
         instance = this;
         pathfinding = GetComponent<Pathfinding>();
@@ -56,5 +55,6 @@ public class PathRequestManager : MonoBehaviour
             pathEnd = _end;
             callback = _callback;
         }
+
     }
 }

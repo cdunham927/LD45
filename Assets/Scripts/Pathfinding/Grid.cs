@@ -134,7 +134,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public List<Node> GetNeighbors(Node node)
+    public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbors = new List<Node>();
 

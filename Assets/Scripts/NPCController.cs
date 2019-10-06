@@ -4,23 +4,41 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public int level = 1;
-
-    public enum states { idle, patrol, scared };
+    public enum states { idle, patrol, scared, run };
     public states curState = states.idle;
 
-    public float speed = 4f;
-    Rigidbody2D bod;
     GameController cont;
-    public Transform target;
-    int pathIndex = 0;
 
+    //Pathfinding
+    public Vector3 target;
+    public float speed = 2;
     Vector3[] path;
+    public bool drawPath;
+    int targetIndex;
+
+    //UI
+    public GameObject NPCText;
+
+    //Getting scared
+    public bool isScared;
+    [Range(0, 1)]
+    public float scareChance = 0.75f;
+
+    //Close target
+    [Range(0f, 5f)]
+    public float closeRadius;
+
+    //For States
+    public float idleCools;
+    public float patrolCools;
+    public float scaredCools;
+    public float runCools;
 
     private void Awake()
     {
         cont = FindObjectOfType<GameController>();
-        target = cont.GetTarget();
+        //target = cont.GetTarget();
+        target = GetCloseTarget();
     }
 
     private void Update()
@@ -28,26 +46,66 @@ public class NPCController : MonoBehaviour
         switch(curState)
         {
             case states.idle:
+                idle();
                 break;
             case states.patrol:
+                patrol();
                 break;
             case states.scared:
+                scared();
+                break;
+            case states.run:
+                run();
                 break;
         }
     }
 
-
-    private void Start()
+    void idle()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        if (Vector3.Distance(transform.position, target) < 0.5f && idleCools <= 0)
+        {
+            target = GetCloseTarget();
+        }
+        idleCools -= Time.deltaTime;
     }
 
-    public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
+    void patrol()
+    {
+
+        patrolCools -= Time.deltaTime;
+    }
+
+    void scared()
+    {
+
+        scaredCools -= Time.deltaTime;
+    }
+
+    void run()
+    {
+
+        runCools -= Time.deltaTime;
+    }
+
+    void Start()
+    {
+        PathRequestManager.RequestPath(transform.position, target, OnPathFound);
+    }
+
+
+    public Vector3 GetCloseTarget()
+    {
+        Vector3 trans = (Vector2)transform.position + Random.insideUnitCircle * closeRadius;
+        idleCools = 1f;
+        return trans;
+    }
+
+    public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
-            path = waypoints;
-
+            path = newPath;
+            targetIndex = 0;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
@@ -55,42 +113,45 @@ public class NPCController : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        pathIndex = 0;
         Vector3 currentWaypoint = path[0];
-        //transform.LookAt(path.lookPoints[0]);
 
         while (true)
         {
             if (transform.position == currentWaypoint)
             {
-                pathIndex++;
-                if (pathIndex >= path.Length)
+                targetIndex++;
+                if (targetIndex >= path.Length)
                 {
                     yield break;
                 }
-                currentWaypoint = path[pathIndex];
+                currentWaypoint = path[targetIndex];
             }
+
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
+
         }
     }
 
     public void OnDrawGizmos()
     {
-        if (path != null)
+        if (drawPath)
         {
-            for (int i = pathIndex; i < path.Length; i++)
+            if (path != null)
             {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                for (int i = targetIndex; i < path.Length; i++)
+                {
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawCube(path[i], Vector3.one);
 
-                if (i == pathIndex)
-                {
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-                else
-                {
-                    Gizmos.DrawLine(path[i - 1], path[i]);
+                    if (i == targetIndex)
+                    {
+                        Gizmos.DrawLine(transform.position, path[i]);
+                    }
+                    else
+                    {
+                        Gizmos.DrawLine(path[i - 1], path[i]);
+                    }
                 }
             }
         }

@@ -21,10 +21,17 @@ public class GameController : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         curCostume = costumeButtons[0];
     }
-    
-    public Transform GetTarget()
+
+    public Vector3 GetTarget()
     {
-        Transform trans = houses[Random.Range(0, houses.Length)].transform;
+        Vector3 trans = houses[Random.Range(0, houses.Length)].transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+
+        return trans;
+    }
+
+    public Vector3 GetRunTarget()
+    {
+        Vector3 trans = mapExits[Random.Range(0, mapExits.Length)].transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 
         return trans;
     }
