@@ -19,6 +19,14 @@ public class NPCController : MonoBehaviour
 
     private void Update()
     {
-        
+        switch(curState)
+        {
+            case states.idle:
+                break;
+            case states.patrol:
+                break;
+            case states.scared:
+                break;
+        }
     }
 }
