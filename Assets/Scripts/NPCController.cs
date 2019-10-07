@@ -40,8 +40,12 @@ public class NPCController : MonoBehaviour
     float stuckCools = 15f;
     float curSpd;
 
+    //Animating
+    Animator anim;
+
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         cont = FindObjectOfType<GameController>();
         player = FindObjectOfType<PlayerController>();
         scareChance = Random.Range(0.1f, 0.5f);
@@ -72,6 +76,8 @@ public class NPCController : MonoBehaviour
                 scared();
                 break;
         }
+
+        if (target != null) anim.SetBool("dir", (transform.position.y > target.y) ? true : false);
     }
 
     void idle()

@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
         }
         if (!hasBought[4] && player.sp >= cost)
         {
-            costumeButtons[4].GetComponentInChildren<Text>().text = "Werewolf";
+            costumeButtons[4].GetComponentInChildren<Text>().text = "Frankenstein";
             curCostume.color = Color.white;
             curCostume = costumeButtons[4];
             hasBought[4] = true;
