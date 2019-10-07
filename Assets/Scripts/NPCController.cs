@@ -118,7 +118,7 @@ public class NPCController : MonoBehaviour
         if ((val - mod) < scareChance)
         {
             clearTextCools = 1f;
-            player.sp += Random.Range(5, 10);
+            player.sp += Random.Range(10, 20);
             curSpd = runSpeed;
             NPCText.GetComponentInChildren<Text>().text = scaredText[Random.Range(0, scaredText.Length)];
             target = cont.GetRunTarget();
