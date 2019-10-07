@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
     public GameObject[] mapExits;
     Image curCostume;
     public Text shopText;
+    public Image playerImage;
+    public Sprite[] playerSprites;
+    public Animator anim;
 
     private void Awake()
     {
@@ -76,6 +79,9 @@ public class GameController : MonoBehaviour
         curCostume.color = Color.white;
         curCostume = costumeButtons[0];
         player.Ghost();
+        playerImage.sprite = playerSprites[0];
+        playerImage.rectTransform.sizeDelta = new Vector2(16, 32);
+        anim.Play("poofAnim");
     }
 
     public void BuySkeleton(int cost)
@@ -85,6 +91,9 @@ public class GameController : MonoBehaviour
             curCostume.color = Color.white;
             curCostume = costumeButtons[1];
             player.Skeleton();
+            playerImage.sprite = playerSprites[1];
+            playerImage.rectTransform.sizeDelta = new Vector2(16, 32);
+            anim.Play("poofAnim");
         }
         if (!hasBought[1] && player.sp >= cost)
         {
@@ -94,6 +103,9 @@ public class GameController : MonoBehaviour
             hasBought[1] = true;
             player.sp -= cost;
             player.Skeleton();
+            playerImage.sprite = playerSprites[1];
+            playerImage.rectTransform.sizeDelta = new Vector2(16, 32);
+            anim.Play("poofAnim");
         }
     }
 
@@ -104,6 +116,9 @@ public class GameController : MonoBehaviour
             curCostume.color = Color.white;
             curCostume = costumeButtons[2];
             player.Clown();
+            playerImage.sprite = playerSprites[2];
+            playerImage.rectTransform.sizeDelta = new Vector2(20, 32);
+            anim.Play("poofAnim");
         }
         if (!hasBought[2] && player.sp >= cost)
         {
@@ -113,6 +128,9 @@ public class GameController : MonoBehaviour
             hasBought[2] = true;
             player.sp -= cost;
             player.Clown();
+            playerImage.sprite = playerSprites[2];
+            playerImage.rectTransform.sizeDelta = new Vector2(20, 32);
+            anim.Play("poofAnim");
         }
     }
 
@@ -123,6 +141,9 @@ public class GameController : MonoBehaviour
             curCostume.color = Color.white;
             curCostume = costumeButtons[3];
             player.Vampire();
+            playerImage.sprite = playerSprites[3];
+            playerImage.rectTransform.sizeDelta = new Vector2(20, 32);
+            anim.Play("poofAnim");
         }
         if (!hasBought[3] && player.sp >= cost)
         {
@@ -132,6 +153,9 @@ public class GameController : MonoBehaviour
             hasBought[3] = true;
             player.sp -= cost;
             player.Vampire();
+            playerImage.sprite = playerSprites[3];
+            playerImage.rectTransform.sizeDelta = new Vector2(20, 32);
+            anim.Play("poofAnim");
         }
     }
 
@@ -142,6 +166,9 @@ public class GameController : MonoBehaviour
             curCostume.color = Color.white;
             curCostume = costumeButtons[4];
             player.Werewolf();
+            playerImage.sprite = playerSprites[4];
+            playerImage.rectTransform.sizeDelta = new Vector2(10, 32);
+            anim.Play("poofAnim");
         }
         if (!hasBought[4] && player.sp >= cost)
         {
@@ -151,6 +178,9 @@ public class GameController : MonoBehaviour
             hasBought[4] = true;
             player.sp -= cost;
             player.Werewolf();
+            playerImage.sprite = playerSprites[4];
+            playerImage.rectTransform.sizeDelta = new Vector2(10, 32);
+            anim.Play("poofAnim");
         }
     }
 }
