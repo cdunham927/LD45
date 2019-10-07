@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     //Physics 
     private Vector2 movement;           
     private Rigidbody2D rb;  
-    public float movementSpeed = 1f;   
+    public float movementSpeed = 1f;
+    public float runSpeed = 2f;
+    float curSpeed;
     
     //States
     public enum states {ghost, skeleton, clown, vampire, werewolf};
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        curSpeed = movementSpeed;
     }
 
     void SetText()
@@ -84,11 +87,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        float shift = Input.GetAxis("Run");
+        if (shift > 0) curSpeed = runSpeed;
+        else curSpeed = movementSpeed;
         //Physics
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * curSpeed * Time.fixedDeltaTime);
 
         //Animations
         anim.SetFloat("moveX", movement.x);
