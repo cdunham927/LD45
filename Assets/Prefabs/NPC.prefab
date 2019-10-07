@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.15}
-  m_SizeDelta: {x: 0.125, y: 0.125}
+  m_AnchoredPosition: {x: 0, y: 0.1}
+  m_SizeDelta: {x: 0.75, y: 0.125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &893810441
 Canvas:
@@ -134,7 +134,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1752647084
 CanvasRenderer:
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '!'
+  m_Text: 
 --- !u!1 &855477172257426540
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 855477172257426545}
   - component: {fileID: 855477172257426546}
   - component: {fileID: 855477172257426547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -296,12 +296,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curState: 0
   target: {x: 0, y: 0, z: 0}
-  speed: 0.775
+  speed: 1
   drawPath: 0
   NPCText: {fileID: 893810437}
-  isScared: 0
+  scaredText:
+  - '!'
+  - '!!!'
+  - Oh shit!
+  - Ahh!
+  - Get away from me!
+  - Get away from me!
+  - Ahh!
+  - Ahh!
+  - '!'
+  - Fuck!
+  notScaredText:
+  - That's not scary.
+  - That's not scary.
+  - Better luck next time.
+  - You can't scare me!
+  runSpeed: 1.5
   scareChance: 0.75
-  closeRadius: 3
+  closeToTarget: 1
 --- !u!61 &855477172257426547
 BoxCollider2D:
   m_ObjectHideFlags: 0

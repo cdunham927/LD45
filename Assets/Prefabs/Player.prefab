@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 6990181674316732578, guid: c8cd12f3acab9174d941b2f83f0e2a13,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,9 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1.3
   curState: 0
-  sp: 2
+  sp: 0
   spText: {fileID: 0}
   spText2: {fileID: 0}
+  atkRadius: 1
+  circObj: {fileID: 0}
 --- !u!50 &4238618618858187833
 Rigidbody2D:
   serializedVersion: 4

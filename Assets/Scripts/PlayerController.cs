@@ -18,18 +18,68 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer rend;
     
     //Variables
-    public int sp = 0;
+    public float sp = 0;
+    float curSp;
     public Text spText;
     public Text spText2;
+    public float lerpSpd;
 
     //Animator
     Animator anim;
+
+    //Scaring
+    float attackCools = 0;
+    public float atkRadius = 1;
+    public Text playerText;
+    public float scareChanceMod = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+    }
+
+    void SetText()
+    {
+        switch(curState)
+        {
+            case states.ghost:
+                playerText.text = "BOO!";
+                break;
+            case states.skeleton:
+                playerText.text = "Rattle me bones!";
+                break;
+            case states.clown:
+                playerText.text = "Come and play with me!";
+                break;
+            case states.vampire:
+                playerText.text = "It'll be painless!";
+                break;
+            case states.werewolf:
+                playerText.text = "You can't run from me!";
+                break;
+        }
+    }
+
+    void Scare()
+    {
+        SetText();
+
+        Collider2D[] NPCs = Physics2D.OverlapCircleAll(transform.position, atkRadius, 1 << LayerMask.NameToLayer("NPC"));
+
+        foreach(Collider2D npcColl in NPCs)
+        {
+            npcColl.GetComponent<NPCController>().CheckScared(scareChanceMod);
+        }
+
+        Invoke("ClearText", 0.5f);
+        attackCools = 0.5f;
+    }
+
+    void ClearText()
+    {
+        playerText.text = "";
     }
 
     void Update()
@@ -46,7 +96,7 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("curCostume", (int)curState);
 
         //States
-        switch(curState)
+        /*switch(curState)
         {
             case states.ghost:
                 break;
@@ -58,37 +108,57 @@ public class PlayerController : MonoBehaviour
                 break;
             case states.werewolf:
                 break;
-        }
-        spText.text = "SP: " + sp.ToString();
-        spText2.text = "SP: " + sp.ToString();
-    }
+        }*/
 
-    
+        curSp = Mathf.Lerp(curSp, sp, lerpSpd * Time.deltaTime);
+
+        spText.text = "SP: " + Mathf.RoundToInt(curSp);
+        spText2.text = "SP: " + Mathf.RoundToInt(curSp);
+
+        if (Input.GetMouseButtonDown(0) && attackCools <= 0)
+        {
+            Scare();
+        }
+
+        if (attackCools > 0) attackCools -= Time.deltaTime;
+
+        if (Application.isEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                scareChanceMod = 0.5f;
+            }
+        }
+    }
 
     //Costume Functions
     public void Ghost()
     {
+        scareChanceMod = 0;
         curState = states.ghost;
-
     }
 
     public void Skeleton()
     {
+        scareChanceMod = 0.1f;
         curState = states.skeleton;
     }
 
     public void Clown()
     {
+        scareChanceMod = 0.125f;
         curState = states.clown;
     }
 
     public void Vampire()
     {
+        scareChanceMod = 0.2f;
         curState = states.vampire;
     }
 
     public void Werewolf()
     {
+        scareChanceMod = 0.2f;
         curState = states.werewolf;
     }
 }
